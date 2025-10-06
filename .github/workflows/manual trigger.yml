@@ -7,3 +7,17 @@ jobs:
     steps:
       - name: Hello
         run: echo " This is manual trigger workflow by faizun again  "
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: discussion
+        run: |
+            echo " We have discussed about the manual trigger workflow "
+            sleep 10s
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: final
+        run: |
+          echo " This is my final statement on manual trigger workflow "
+          sleep 10s
