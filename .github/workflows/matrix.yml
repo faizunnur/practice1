@@ -1,32 +1,27 @@
-name: Manual Matrix Workflow
+name: Matrix Demo
 
 on:
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  matrix-job:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ${{ matrix.os }} # Use the OS from the matrix
     strategy:
       matrix:
-        include:
-          - task: "Greeting"
-            message: "This is the first job (greeting)."
-            delay: 5
-          - task: "Discussion"
-            message: "This is the second job (discussion)."
-            delay: 10
-          - task: "Final Statement"
-            message: "This is the third job (final statement)."
-            delay: 15
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
 
     steps:
-      - name: ${{ matrix.task }}
-        run: |
-          echo "${{ matrix.message }}"
-          echo "Waiting for ${{ matrix.delay }} seconds..."
-          sleep ${{ matrix.delay }}
-          echo "Done."
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }} # Use the Node.js version from the matrix
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
