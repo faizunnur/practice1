@@ -1,6 +1,8 @@
 name: Manual
-on:
-  workflow_dispatch:
+on: [push]
+concurrency:
+  group: 'manual-trigger-group'
+  cancel-in-progress: true
 jobs:
   greet:
     runs-on: ubuntu-latest
