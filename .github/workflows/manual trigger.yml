@@ -5,5 +5,5 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Greeting
+      - name: Hello
         run: echo " This is manual trigger workflow by faizun again"
