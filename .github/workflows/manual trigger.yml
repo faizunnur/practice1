@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo " This is manual trigger workflow by faizun again"
+        run: echo " This is manual trigger workflow by faizun again  "
